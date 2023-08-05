@@ -1,4 +1,12 @@
-import { Text, Stack, Image, HStack, List, ListItem } from "@chakra-ui/react";
+import {
+  Text,
+  Stack,
+  Image,
+  HStack,
+  List,
+  ListItem,
+  Spinner,
+} from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
@@ -6,10 +14,11 @@ const GenreList = () => {
   const { data, error, isLoading } = useGenres();
   return (
     <>
+      {isLoading && <Spinner />}
       {error && <Text> {error} </Text>}
       <List justifyContent={"space-between"}>
         {data.map((genre) => (
-          <ListItem paddingY="5px">
+          <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
                 src={getCroppedImageUrl(genre.image_background)}

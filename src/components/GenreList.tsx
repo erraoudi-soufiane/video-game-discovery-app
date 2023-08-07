@@ -8,6 +8,8 @@ import {
   Spinner,
   Button,
   theme,
+  Heading,
+  Box,
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
@@ -20,7 +22,10 @@ interface Props {
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, error, isLoading } = useGenres();
   return (
-    <>
+    <Box marginTop={6}>
+      <Heading as={"h2"} size={"lg"} marginBottom={4}>
+        Genres
+      </Heading>
       {isLoading && <Spinner />}
       {error && <Text> {error} </Text>}
       <List justifyContent={"space-between"}>
@@ -28,11 +33,14 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
+                objectFit="cover"
                 src={getCroppedImageUrl(genre.image_background)}
                 boxSize={"32px"}
                 borderRadius={10}
               />
               <Button
+                whiteSpace="normal"
+                textAlign="left"
                 onClick={() => onSelectGenre(genre)}
                 variant="link"
                 fontSize="lg"
@@ -44,7 +52,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
           </ListItem>
         ))}
       </List>
-    </>
+    </Box>
   );
 };
 

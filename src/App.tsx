@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Heading, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -47,6 +47,16 @@ function App() {
       </Show>
 
       <GridItem area="main">
+        <Heading
+          marginX="20px"
+          marginBottom={5}
+          as="h1"
+          size="4xl"
+          noOfLines={1}
+        >
+          {" "}
+          {gameQuery.platform?.name} {gameQuery.genre?.name} Games{" "}
+        </Heading>
         <HStack marginX="20px" marginBottom={5}>
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
